@@ -1,0 +1,7 @@
+[core]
+    remote = origin
+['remote "origin"']
+    url = https://dagshub.com/NajiBouZeid/mlops-lab-1.dvc
+    auth = basic
+    user = NajiBouZeid
+    password = c32431a4de5dd829e2e104c6a6ab6838419521fa
