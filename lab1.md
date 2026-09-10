@@ -1,10 +1,9 @@
 # Lab 1 - Answers
 
-## Matricule: 231833
-## Full Name: Naji Bou Zeid
-## Group: MLOps grp 7
-## Date: 8-9-2026
-
+> **Matricule:** 231833
+> **Full Name:** Naji Bou Zeid
+> **Group:** MLOps grp 7
+> **Date:** 8-9-2026
 
 ## Note on Data Push Solution
 
