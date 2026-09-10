@@ -1,7 +1,6 @@
 [core]
-    remote = origin
+    remote = local_storage
 ['remote "origin"']
     url = https://dagshub.com/NajiBouZeid/mlops-lab-1.dvc
-    auth = basic
-    user = NajiBouZeid
-    password = c32431a4de5dd829e2e104c6a6ab6838419521fa
+['remote "local_storage"']
+    url = C:\Users\eabou\Desktop\USJ 3eme annee\mlops\dvc_storage
