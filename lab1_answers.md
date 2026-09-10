@@ -70,7 +70,7 @@ After that, `Get-ChildItem data` shows `food11_processed`, `food11_processed_min
 
 Note: My remote is a **local folder** (`dvc_storage`, per Option 1), so this test only works because the clone and the remote both live on the same machine - `dvc pull` is really just a local file copy here, not a real network transfer. On a different machine, `dvc pull` would fail, since nobody else has access to that local path. 
 
-## Question 8: checking out an old commi
+## Question 8: Do you still see the new folders you created? food11_processed and food11_processed_mini?
 
 Checking out commit `bad72ab` ("Switch to local dvc remote" — the commit right before `food11_processed`/`food11_processed_mini` were added)
 
