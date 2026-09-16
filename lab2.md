@@ -33,7 +33,7 @@ The first time `mlflow.set_experiment("food11")` is called with a name that does
 INFO mlflow.tracking.fluent: Experiment with name 'food11' does not exist. Creating a new experiment.
 ```
 
-![food11 experiment appears in mlflow UI](screenshots/lab2-q4-experiment-created.png)
+![food11 experiment appears in mlflow UI](screenshots/lab2-q4-experiment.png)
 Checking the mlflow UI confirms it — the `food11` experiment now appears in the Experiments list alongside the default "Default" experiment that exists from the start.
 
 ## Question 5: What is the difference between `mlflow.log_param` and `mlflow.log_metric`? Why does `log_metric` take a `step` argument and `log_param` doesn't?
