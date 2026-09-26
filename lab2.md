@@ -33,7 +33,7 @@ The first time `mlflow.set_experiment("food11")` is called with a name that does
 INFO mlflow.tracking.fluent: Experiment with name 'food11' does not exist. Creating a new experiment.
 ```
 
-![food11 experiment appears in mlflow UI](screenshots/lab2-q4-experiment.png)
+![food11 experiment appears in mlflow UI](screenshots/lab2-ss/lab2-q4-experiment.png)
 Checking the mlflow UI confirms it — the `food11` experiment now appears in the Experiments list alongside the default "Default" experiment that exists from the start.
 
 ## Question 5: What is the difference between `mlflow.log_param` and `mlflow.log_metric`? Why does `log_metric` take a `step` argument and `log_param` doesn't?
@@ -46,11 +46,11 @@ That's exactly why `log_metric` takes a `step` argument and `log_param` doesn't:
 
 Opening the run `capable-grouse-896` in the mlflow UI, the **Overview** tab shows the **Parameters** table (`dataset`, `epochs`, `lr`, `batch_size`, `model`, `device`) and the **Metrics** table (`train_loss`, `val_loss`, `val_accuracy`, `test_accuracy` with their final values). The **Model metrics** tab shows the same metrics as line charts across epochs. The **Artifacts** tab, under the associated logged model, shows files like `MLmodel`, `conda.yaml`, `requirements.txt`, `input_example.json` — this is the logged PyTorch model.
 
-![Run parameters and metrics in mlflow UI](screenshots/lab2-q6-params.png)
+![Run parameters and metrics in mlflow UI](screenshots/lab2-ss/lab2-q6-params.png)
 
-![Metric charts in mlflow UI](screenshots/lab2-q6-metrics.png)
+![Metric charts in mlflow UI](screenshots/lab2-ss/lab2-q6-metrics.png)
 
-![Model artifact in mlflow UI](screenshots/lab2-q6-artifacts.png)
+![Model artifact in mlflow UI](screenshots/lab2-ss/lab2-q6-artifacts.png)
 
 The `MLmodel` file's own content confirms exactly where the artifact lives on disk — its `artifact_path` field points to:
 
@@ -69,7 +69,7 @@ Comparing the four runs on the mlflow Compare page confirms it directly — the 
 | monumental-bat-849 | 0.001 | 32 | 0.502 | 0.559 |
 | righteous-bass-480 | 0.01 | 32 | 0.154 | 0.133 |
 
-![Comparing 4 runs in the mlflow UI](screenshots/lab2-q7-compare.png)
+![Comparing 4 runs in the mlflow UI](screenshots/lab2-ss/lab2-q7-compare.png)
 
 `lr=0.0001` gave the best `val_accuracy` (0.697) and the best `test_accuracy` (0.763), clearly ahead of the other three. So **no, higher is not always better** — `lr=0.01` performed the worst by far (`val_accuracy` of just 0.154, barely above random guessing for 11 classes), while the smallest learning rate tested let the pretrained resnet18 fine-tune the most effectively over 5 epochs.
 
@@ -77,7 +77,7 @@ Comparing the four runs on the mlflow Compare page confirms it directly — the 
 
 Using the parallel coordinates plot with `lr`, `batch_size`, and `val_accuracy`:
 
-![Parallel coordinates plot: lr, batch_size, val_accuracy](screenshots/lab2-q8-parallel-coords.png)
+![Parallel coordinates plot: lr, batch_size, val_accuracy](screenshots/lab2-ss/lab2-q8-parallel-coords.png)
 
 The dominant pattern is that `lr` drives most of the spread in `val_accuracy`, while `batch_size` has a much smaller effect. The line for `lr=0.01` (righteous-bass-480) dips to the lowest `val_accuracy` on the right axis (0.154), regardless of its `batch_size=32`. The line for `lr=0.0001` (unequaled-mule-30) reaches the highest `val_accuracy` (0.697), also at `batch_size=32`. Comparing the two `lr=0.001` runs — `batch_size=32` (monumental-bat-849, val_accuracy 0.502) vs. `batch_size=64` (capable-grouse-896, val_accuracy 0.575) — the gap between them is much smaller than the gap caused by changing `lr` alone. So the plot makes clear that `lr` is the variable that matters most for this sweep, and `batch_size` only shifts the result slightly within whatever range `lr` has already set.
 
@@ -85,12 +85,12 @@ The dominant pattern is that `lr` drives most of the spread in `val_accuracy`, w
 
 Sorting the runs table by `val_accuracy` descending confirms it directly:
 
-![Runs table sorted by val_accuracy descending](screenshots/lab2-q9-sorted.png)
+![Runs table sorted by val_accuracy descending](screenshots/lab2-ss/lab2-q9-sorted.png)
 
 `unequaled-mule-30` sits at the top with `val_accuracy` of 0.697.
 Opening the run confirms its full details:
 
-![unequaled-mule-30 run overview](screenshots/lab2-q9-run-detail.png)
+![unequaled-mule-30 run overview](screenshots/lab2-ss/lab2-q9-run-detail.png)
 
 trained with `lr=0.0001`, `batch_size=32`, `epochs=5`, `dataset=mini` — `val_accuracy` 0.6971, `test_accuracy` 0.7628.
 
