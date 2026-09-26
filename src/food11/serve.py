@@ -19,6 +19,9 @@ from fastapi import FastAPI, File, UploadFile
 from PIL import Image
 from torchvision import transforms
 
+# edit for q4:
+# cache demo edit 
+
 MLFLOW_TRACKING_URI = os.environ.get("MLFLOW_TRACKING_URI", "http://127.0.0.1:5000")
 MODEL_URI = "models:/food11@champion"
 
@@ -77,3 +80,5 @@ async def predict(file: UploadFile = File(...)) -> dict:
         "category": CATEGORIES[predicted_idx],
         "confidence": confidence,
     }
+
+
