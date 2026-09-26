@@ -3,9 +3,11 @@
 > **Matricule:** 231833
 > **Full Name:** Naji Bou Zeid
 > **Group:** MLOps grp 7
-> **Date:** 8-9-2026
+> **Date:** 8-9-2026    
 
 ## Note on Data Push Solution
+
+**Update:** the full dataset was later pushed to DagsHub successfully as well (`dvc push -r origin`, 16,120 files), once network conditions improved — so DagsHub now also holds the current full dataset, in addition to the local remote copy from Option 1.
 
 I adopted **Solution 1 (local dvc remote)** as my final approach: I set the dvc remote to a local folder outside my git repository, which let me track and push the full dataset.
 
