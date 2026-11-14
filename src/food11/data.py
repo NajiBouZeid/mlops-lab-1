@@ -10,9 +10,10 @@ Run with:
 """
 
 from pathlib import Path
+
 from PIL import Image
 
-CATEGORIES = [
+CLASSES = [
     "Bread",
     "Dairy product",
     "Dessert",
@@ -42,7 +43,13 @@ def category_from_filename(filename: str) -> str:
     """Food-11 filenames start with the class index, e.g. '0_123.jpg' -> Bread."""
     label_str = filename.split("_", 1)[0]
     label_idx = int(label_str)
-    return CATEGORIES[label_idx]
+    return CLASSES[label_idx]
+
+
+
+def resize_image(img: Image.Image, size: int = 128) -> Image.Image:
+    """Returns an RGB image of size x size."""
+    return img.convert("RGB").resize((size, size), Image.BILINEAR)
 
 
 def process_split(split: str) -> None:
@@ -51,7 +58,7 @@ def process_split(split: str) -> None:
         print(f"  [skip] {src_split_dir} not found")
         return
 
-    mini_counts = {cat: 0 for cat in CATEGORIES}
+    mini_counts = {cat: 0 for cat in CLASSES}
 
     files = sorted(
         f for f in src_split_dir.iterdir()
@@ -67,8 +74,7 @@ def process_split(split: str) -> None:
             continue
 
         with Image.open(src_file) as img:
-            img = img.convert("RGB").resize(TARGET_SIZE, Image.BILINEAR)
-
+            img = resize_image(img, TARGET_SIZE[0])
             # full processed dataset
             out_dir = PROCESSED_DIR / split / category
             out_dir.mkdir(parents=True, exist_ok=True)

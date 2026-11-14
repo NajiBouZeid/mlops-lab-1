@@ -11,11 +11,12 @@ Test:
 
 import os
 from io import BytesIO
+from typing import Annotated
 
 import mlflow
 import mlflow.pyfunc
 import numpy as np
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from PIL import Image
 from torchvision import transforms
 
@@ -54,8 +55,10 @@ model = None
 
 @app.on_event("startup")
 def load_model() -> None:
-    """Load the model once at process startup, not per-request."""
+    """Load the model once at process startup; skipped when SKIP_MODEL is set."""
     global model
+    if os.environ.get("SKIP_MODEL"):
+        return
     mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
     model = mlflow.pyfunc.load_model(MODEL_URI)
 
@@ -66,7 +69,9 @@ def health() -> dict:
 
 
 @app.post("/predict")
-async def predict(file: UploadFile = File(...)) -> dict:
+async def predict(file: Annotated[UploadFile, File()]) -> dict:
+    if model is None:
+        raise HTTPException(status_code=503, detail="Model not loaded")
     image_bytes = await file.read()
     image = Image.open(BytesIO(image_bytes)).convert("RGB")
     tensor = transform(image).unsqueeze(0).numpy()  # shape (1, 3, 128, 128)
