@@ -7,7 +7,7 @@
 
 ## Notes on the Setup
 
-A few adjustments were needed compared to the lab text (Windows + PowerShell, mlflow 3.16, current ruff):
+A few adjustments were needed compared to the lab text:
 
 - **CPU-only torch:** `pyproject.toml` points `torch` and `torchvision` to the PyTorch CPU index, so `uv sync` in CI downloads the ~200 MB CPU wheel instead of the multi-GB CUDA build:
   ```toml
