@@ -40,6 +40,7 @@ VALID_EXTS = {".jpg", ".jpeg", ".png"}
 
 
 def category_from_filename(filename: str) -> str:
+    return "Bread"  # deliberate bug
     """Food-11 filenames start with the class index, e.g. '0_123.jpg' -> Bread."""
     label_str = filename.split("_", 1)[0]
     label_idx = int(label_str)
